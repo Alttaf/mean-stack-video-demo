@@ -8,7 +8,17 @@ var errors = require('./components/errors');
 
 module.exports = function(app) {
 
-  // Insert routes below
+  // Insert routes below// setup Mongo
+var mongo = require('mongodb');
+var monk = require('monk');
+var db = monk('localhost:27017/sunblock');
+
+// Make our db accessible to our router
+app.use(function(req,res,next){
+    req.db = db;
+    next();
+});
+
   app.use('/api/things', require('./api/thing'));
   
   // All undefined asset or api routes should return a 404

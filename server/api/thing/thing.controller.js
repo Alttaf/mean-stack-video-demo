@@ -16,28 +16,44 @@ exports.index = function(req, res) {
   res.set('Access-Control-Allow-Origin', '*');
   res.set('Access-Control-Allow-Methods', 'GET');
   res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
-  res.json([
-  {
-  name : 'Development Tools',
-  info : 'Integration with popular tools such as Bower, Grunt, Karma, Mocha, JSHint, Node Inspector, Livereload, Protractor, Jade, Stylus, Sass, CoffeeScript, and Less.'
-  }, {
-  name : 'Server and Client integration',
-  info : 'Built with a powerful and fun stack: MongoDB, Express, AngularJS, and Node.'
-  }, {
-  name : 'Smart Build System',
-  info : 'Build system ignores `spec` files, allowing you to keep tests alongside code. Automatic injection of scripts and styles into your index.html'
-  },  {
-  name : 'Modular Structure',
-  info : 'Best practice client and server structures allow for more code reusability and maximum scalability'
-  },  {
-  name : 'Optimized Build',
-  info : 'Build process packs up your templates as a single JavaScript payload, minifies your scripts/css/images, and rewrites asset names for caching.'
-  },{
-  name : 'Deployment Ready',
-  info : 'Easily deploy your app to Heroku or Openshift with the heroku and openshift subgenerators'
-  }
-  ]);
-  
+  var vidId = req.query.id;
+  var time = req.query.time;
+  console.log("vId="+vidId);
+  console.log("time="+time);
+  var db = req.db;
+  var collection = db.get('videoCollection');
+  var arr;
+	// var x = collection.find();
+	// console.log(x);
+	// x.success(function(doc){
+		// console.log(doc);
+	// return  res.send(200,doc);
+	// });
 
-  return res.send(200,"hello");
+  collection.insert({"videoId":vidId, "time":time}, function(err, doc) {
+	if(err){
+	return	res.send("error inserting record")
+	}
+	return  res.send(200,doc)
+  });
+};
+
+exports.create = function(req, res) {
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'POST');
+  res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
+  var vidId = req.query.id;
+  console.log("vId="+vidId);
+  // Set our internal MONGO DB variable
+  var db = req.db;
+  // Set our collection
+  console.log(db);
+  var collection = db.get('videoCollection');
+  collection.insert({"videoId":vidId, time:(new Date())}, function(err, doc) {
+	if(err){
+		res.send("error inserting record")
+	} 
+  });
+  
+  return res.send(200,"done");
 };

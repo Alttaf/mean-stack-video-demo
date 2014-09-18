@@ -2,10 +2,10 @@
 
 angular.module('projectApp')
   .controller('MainCtrl', function ($scope, $http) {
-    $scope.awesomeThings = [];
+    $scope.videoResults = [];
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
+    $http.get('/dashboard').success(function(videoResults) {
+      $scope.videoResults = videoResults;
     });
 
   });

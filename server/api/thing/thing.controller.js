@@ -17,12 +17,16 @@ exports.index = function(req, res) {
   res.set('Access-Control-Allow-Methods', 'GET');
   res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
   var vidId = req.query.id;
-  var time = req.query.time;
+  var videoTime = req.query.time;
+  var action = req.query.action;
+  var time = new Date();
+  var ip = req.ip;
   console.log("vId="+vidId);
   console.log("time="+time);
+  console.log("ip="+req.ip);
   var db = req.db;
   var collection = db.get('videoCollection');
-  var arr;
+  
 	// var x = collection.find();
 	// console.log(x);
 	// x.success(function(doc){
@@ -30,7 +34,7 @@ exports.index = function(req, res) {
 	// return  res.send(200,doc);
 	// });
 
-  collection.insert({"videoId":vidId, "time":time}, function(err, doc) {
+  collection.insert({"videoId":vidId, "action":action, "videoTime":videoTime, "time":time, "ip":ip}, function(err, doc) {
 	if(err){
 	return	res.send("error inserting record")
 	}
@@ -43,13 +47,14 @@ exports.create = function(req, res) {
   res.set('Access-Control-Allow-Methods', 'POST');
   res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
   var vidId = req.query.id;
+  var ip = req.ip;
   console.log("vId="+vidId);
   // Set our internal MONGO DB variable
   var db = req.db;
   // Set our collection
   console.log(db);
   var collection = db.get('videoCollection');
-  collection.insert({"videoId":vidId, time:(new Date())}, function(err, doc) {
+  collection.insert({"videoId":vidId,"ip":ip, "action":"page load", time:(new Date())}, function(err, doc) {
 	if(err){
 		res.send("error inserting record")
 	} 

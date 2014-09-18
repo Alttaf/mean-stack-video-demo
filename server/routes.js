@@ -26,8 +26,22 @@ app.use(function(req,res,next){
    .get(errors[404]);
 
   // All other routes should redirect to the index.html
-  app.route('/*')
-    .get(function(req, res) {
-      res.sendfile(app.get('appPath') + '/index.html');
-    });
+  app.route('/dashboard')
+	.get(function(req, res) {
+		res.set('Access-Control-Allow-Origin', '*');
+		res.set('Access-Control-Allow-Methods', 'GET');
+		res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
+		var db = req.db;
+		var collection = db.get('videoCollection');
+		var x = collection.find({},{sort:[['time','desc'], ['ip','desc']]});
+		x.success(function(doc){
+		console.log(doc);
+		return  res.send(200,doc);
+		});
+		x.error(function(err){
+		console.log(err);
+		return res.send(400,err);
+		});
+	});
+     // res.sendfile(app.get('appPath') + '/index.html');
 };

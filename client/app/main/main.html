@@ -15,15 +15,15 @@
 	  <tr>
 		<th>IP address </th>
 		<th>Time Initiated </th>
-		<th>Video Action </th>
 		<th>Video ID</th>
-		<th>Video Action Play time </th>
+		<th>Video Action </th>
+		<th>Video Action time </th>
 	  </tr>
 	  <tr ng-repeat="result in videoResults">
 		<td>{{result.ip}}  </td>
 		<td>{{result.time | date:'medium'}}  </td>
-		<td>{{result.action}}  </td>
 		<td>{{result.videoId}} </td>
+		<td>{{result.action}}  </td>
 		<td>{{result.videoTime}}  </td>
 	  </tr>
 	  </table>

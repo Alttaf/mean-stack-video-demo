@@ -33,15 +33,16 @@ exports.index = function (req, res) {
 			"transaction" : {
 				"videoId" : vidId,
 				"action" : action,
+                "videoTime":videoTime,
 				time : (new Date())
 			}
 		}
 	}, function (err) {
 		if (err) {
-			return res.send(500, "error updating record")
+			return res.send(500, "error updating record");
 		}
-		console.log("updated record")
-		return res.send(200, doc)
+		console.log("updated record");
+		return res.send(200, "updated record");
 	});
 };
 
@@ -59,12 +60,13 @@ exports.create = function (req, res) {
 		"transaction" : [{
 				"videoId" : vidId,
 				"action" : "page load",
+				"videoTime" : "",
 				time : (new Date())
 			}
 		]
 	}, function (err, doc) {
 		if (err) {
-			res.send("error inserting record")
+			res.send("error inserting record");
 		}
 	});
 

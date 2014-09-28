@@ -37,7 +37,7 @@ module.exports = function (app) {
 		var collection = db.get('videoCollection');
 		// get all the videos in time and ip order (monk returns a promise at this point)
 		var videos = collection.find({}, {
-				sort : [['ip', 'desc']]
+				sort : [['transaction.time', '-1'],['_id', 'desc']]
 			});
 		// on success send back the list of videos 
 		videos.success(function (doc) {			

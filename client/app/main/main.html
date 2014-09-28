@@ -35,12 +35,14 @@
 			<th>Video ID</th>
 			<th>Video Action </th>
 			<th>Video Action time </th>
+			<th>Session ID </th>
 		</tr>
 		  <tr ng-repeat="transaction in result.transaction">
 			<td>{{transaction.time | date:'medium'}}  </td>
 			<td>{{transaction.videoId}} </td>
 			<td>{{transaction.action}}  </td>
 			<td>{{transaction.videoTime}}  </td>
+			<td>{{result._id}}  </td>
 		  </tr>
 		</table>
 	  </div>

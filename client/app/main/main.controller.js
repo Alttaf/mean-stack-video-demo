@@ -5,7 +5,7 @@ angular.module('projectApp')
     $scope.videoResults = [];
 
     $http.get('/dashboard').success(function(videoResults) {
-      $scope.videoResults = videoResults;
+      $scope.videoResults = videoResults.reverse();
     });
 
   });

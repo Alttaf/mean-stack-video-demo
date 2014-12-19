@@ -31,7 +31,7 @@ install apache and just dump this into the /var/www/html dir.  Make sure you cha
 
 
 <h2>Demo</h2>
-Client : mean-video.alttaf.co.uk
+Client : mean-video.alttaf.co.uk<br>
 Dashboard : mean-video.alttaf.co.uk:9000
 
 
